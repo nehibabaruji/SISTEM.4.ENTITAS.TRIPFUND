@@ -1,6 +1,5 @@
 const {
   getCustomers,
-  createCustomer,
   updateCustomer,
   deleteCustomer,
   getVendors,
@@ -17,6 +16,16 @@ const {
   cancelVendorAdvancePayment,
   getDashboardSummary,
 } = window.TripFundAPI || {};
+
+const supabaseClient = supabase.createClient(
+  'https://hyutdmborkfuiyjfsviq.supabase.co',
+  'sb_publishable_dnnxMn1y00FYdMPCJJ3O8Q_LszhdGFe'
+);
+
+async function createCustomer(data) {
+  const { error } = await supabaseClient.from('customers').insert(data);
+  if (error) throw error;
+}
 
 const state = {
   customers: [],
