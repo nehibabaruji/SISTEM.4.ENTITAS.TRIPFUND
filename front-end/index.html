@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TripFund</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand-wrap">
+          <div class="brand-mark">TF</div>
+          <div>
+            <h1>TripFund</h1>
+          </div>
+        </div>
+
+        <nav class="nav-menu" aria-label="Sidebar navigation">
+          <button class="nav-item active" data-section="dashboard">
+            <span>Dashboard</span>
+          </button>
+          <button class="nav-item" data-section="customers">
+            <span>Data Pelanggan</span>
+          </button>
+          <button class="nav-item" data-section="vendors">
+            <span>Data Vendor</span>
+          </button>
+          <button class="nav-item" data-section="deposits">
+            <span>Deposit Pelanggan</span>
+          </button>
+          <button class="nav-item" data-section="vendor-advances">
+            <span>Uang Muka Vendor</span>
+          </button>
+        </nav>
+      </aside>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Sistem keuangan perjalanan</p>
+            <h2 id="page-title">Dashboard</h2>
+          </div>
+          <div class="topbar-meta">
+            <span id="current-date" aria-live="polite"></span>
+          </div>
+        </header>
+
+        <div class="notification" id="notification" aria-live="polite"></div>
+
+        <section class="page-section active" id="dashboard-section">
+          <div class="stat-grid">
+            <article class="stat-card accent-teal">
+              <div class="stat-label">Total Deposit Paid</div>
+              <div class="stat-value" id="total-deposit-paid">Rp 0</div>
+            </article>
+            <article class="stat-card accent-sky">
+              <div class="stat-label">Total Uang Muka Paid</div>
+              <div class="stat-value" id="total-advance-paid">Rp 0</div>
+            </article>
+            <article class="stat-card accent-navy">
+              <div class="stat-label">Selisih Dana Tercatat</div>
+              <div class="stat-value" id="net-balance">Rp 0</div>
+            </article>
+            <article class="stat-card accent-olive">
+              <div class="stat-label">Jumlah Deposit</div>
+              <div class="stat-value" id="deposit-count">0</div>
+            </article>
+            <article class="stat-card accent-amber">
+              <div class="stat-label">Jumlah Uang Muka</div>
+              <div class="stat-value" id="advance-count">0</div>
+            </article>
+            <article class="stat-card accent-rose">
+              <div class="stat-label">Transaksi Pending</div>
+              <div class="stat-value" id="pending-count">0</div>
+            </article>
+          </div>
+        </section>
+
+        <section class="page-section" id="customers-section">
+          <div class="panel-header">
+            <div>
+              <h3>Data Pelanggan</h3>
+            </div>
+            <div class="panel-actions">
+              <input type="search" id="customer-search" placeholder="Cari pelanggan..." />
+              <button class="primary-button" data-add-type="customers">Tambah Pelanggan</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kode</th>
+                  <th>Nama</th>
+                  <th>Telepon</th>
+                  <th>Email</th>
+                  <th>Dibuat</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="customers-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="page-section" id="vendors-section">
+          <div class="panel-header">
+            <div>
+              <h3>Data Vendor</h3>
+            </div>
+            <div class="panel-actions">
+              <input type="search" id="vendor-search" placeholder="Cari vendor..." />
+              <button class="primary-button" data-add-type="vendors">Tambah Vendor</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kode</th>
+                  <th>Nama Vendor</th>
+                  <th>Jenis Layanan</th>
+                  <th>Telepon</th>
+                  <th>Dibuat</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="vendors-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="page-section" id="deposits-section">
+          <div class="panel-header">
+            <div>
+              <h3>Deposit Pelanggan</h3>
+            </div>
+            <div class="panel-actions">
+              <input type="search" id="deposit-search" placeholder="Cari transaksi..." />
+              <select id="deposit-status-filter">
+                <option value="">Semua status</option>
+                <option value="pending">Pending</option>
+                <option value="paid">Paid</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <input type="date" id="deposit-start-date" />
+              <input type="date" id="deposit-end-date" />
+              <button class="primary-button" data-add-type="customerDeposits">Tambah Deposit</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kode</th>
+                  <th>Pelanggan</th>
+                  <th>Trip</th>
+                  <th>Nominal</th>
+                  <th>Tanggal</th>
+                  <th>Metode</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="deposits-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="page-section" id="vendor-advances-section">
+          <div class="panel-header">
+            <div>
+              <h3>Uang Muka Vendor</h3>
+            </div>
+            <div class="panel-actions">
+              <input type="search" id="advance-search" placeholder="Cari transaksi..." />
+              <select id="advance-status-filter">
+                <option value="">Semua status</option>
+                <option value="pending">Pending</option>
+                <option value="paid">Paid</option>
+                <option value="cancelled">Cancelled</option>
+              </select>
+              <input type="date" id="advance-start-date" />
+              <input type="date" id="advance-end-date" />
+              <button class="primary-button" data-add-type="vendorAdvances">Tambah Uang Muka</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Kode</th>
+                  <th>Vendor</th>
+                  <th>Trip</th>
+                  <th>Nominal</th>
+                  <th>Tanggal</th>
+                  <th>Metode</th>
+                  <th>Status</th>
+                  <th>Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="vendor-advances-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div id="modal-backdrop" class="modal-backdrop hidden" aria-hidden="true">
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-header">
+          <h3 id="modal-title">Form</h3>
+          <button type="button" id="close-modal-button" class="icon-button" aria-label="Tutup modal">×</button>
+        </div>
+        <form id="entity-form">
+          <div class="modal-body" id="modal-form-body"></div>
+          <div class="modal-actions">
+            <button type="button" class="secondary-button" id="cancel-form-button">Batal</button>
+            <button type="submit" class="primary-button">Simpan</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../back-end/app.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
